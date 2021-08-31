@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { Button } from 'antd-mobile'
+import 'antd-mobile/dist/antd-mobile.css'
+// 配置整体路由
+import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 
+function Login() {
+  return <div>login</div>
+}
+function Home () {
+  return <div>home</div>
+}
+function NotFound () {
+  return <div>没有该页面</div>
+}
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path='/login' component={Login}></Route>
+        <Route path='/home' component={Home}></Route>
+        <Redirect exact from='/' to='/home'></Redirect>
+        <Route component={NotFound}></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
