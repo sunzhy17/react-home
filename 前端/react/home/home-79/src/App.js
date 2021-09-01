@@ -4,12 +4,10 @@ import 'antd-mobile/dist/antd-mobile.css'
 // 配置整体路由
 import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 
-function Login() {
-  return <div>login</div>
-}
-function Home () {
-  return <div>home</div>
-}
+import Login from './views/login/Login'
+import Home from './views/home/Home'
+
+
 function NotFound () {
   return <div>没有该页面</div>
 }
