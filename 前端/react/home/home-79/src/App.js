@@ -7,6 +7,14 @@ import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import Login from './views/login/Login'
 import Home from './views/home/Home'
 
+import axios from 'axios';
+
+//配置请求基本路径
+axios.defaults.baseURL = 'http://localhost:8080/'
+//配置响应拦截器
+axios.interceptors.response.use((res)=>{
+  return res.data
+})
 
 function NotFound () {
   return <div>没有该页面</div>
