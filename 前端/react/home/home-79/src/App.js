@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 
 import Login from './views/login/Login'
 import Home from './views/home/Home'
+import City from './views/City';
+
+import Test from './views/Test'
 
 import axios from 'axios';
 
@@ -25,6 +28,8 @@ function App() {
       <Switch>
         <Route path='/login' component={Login}></Route>
         <Route path='/home' component={Home}></Route>
+        <Route path='/city' component={City}></Route>
+        <Route path='/test' component={Test}></Route>
         <Redirect exact from='/' to='/home'></Redirect>
         <Route component={NotFound}></Route>
       </Switch>

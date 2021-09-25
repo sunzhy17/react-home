@@ -17,13 +17,31 @@ class Index extends React.Component {
             swiper: [],
             groups: [],
             news: [],
-            imgHeight: 212
+            imgHeight: 212,
+            currentCity: '北京'
         }
     }
     componentDidMount() {
         this.loadSwiper()
         this.loadGroup()
         this.loadNews()
+        // 从本地缓存获取城市名称
+        let city = JSON.parse(localStorage.getItem('currentCity'))
+        this.setState({
+            currentCity: city.label
+        })
+        // 通过百度地图的地理定位API获取当前城市信息
+        let myCity = new window.BMapGL.LocalCity()
+        myCity.get(async(result) => {
+            // 获取到定位的城市名称后，需要进行缓存
+            let currentCity = await axios('area/info',{
+                params: {
+                    name: result.name
+                }
+            })
+            // 获取城市详细信息后，缓存起来
+            localStorage.setItem('currentCity',JSON.stringify(currentCity.body))
+        })
     }
     loadSwiper= async () => {
         // axios.get('home/swiper')
@@ -133,7 +151,11 @@ class Index extends React.Component {
                 {/* 导航栏 */}
                 <NavBar
                     mode="dark"
-                    leftContent={'深圳'}
+                    leftContent={this.state.currentCity}
+                    onLeftClick={() => {
+                        // 点击时跳转到选择城市的页面
+                        this.props.history.push('/city')
+                    }}
                     rightContent={[
                         <Icon key="0" type="search" style={{ marginRight: '16px' }} />
                     ]}
